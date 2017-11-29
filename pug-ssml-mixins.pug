@@ -14,46 +14,46 @@
 //-   - expletive: “Bleep” out the content inside the tag.
 //-
 mixin characters
-  say-as interpret-as="characters"
+  say-as(interpret-as="characters")
     block
 mixin spell-as
-  say-as interpret-as="spell-as"
+  say-as(interpret-as="spell-as")
     block
 mixin number
-  say-as interpret-as="number"
+  say-as(interpret-as="number")
     block
 mixin cardinal
-  say-as interpret-as="cardinal"
+  say-as(interpret-as="cardinal")
     block
 mixin ordinal
-  say-as interpret-as="ordinal"
+  say-as(interpret-as="ordinal")
     block
 mixin digits
-  say-as interpret-as="digits"
+  say-as(interpret-as="digits")
     block
 mixin fraction
-  say-as interpret-as="fraction"
+  say-as(interpret-as="fraction")
     block
 mixin unit
-  say-as interpret-as="unit"
+  say-as(interpret-as="unit")
     block
 mixin date
-  say-as interpret-as="date"
+  say-as(interpret-as="date")
     block
 mixin time
-  say-as interpret-as="time"
+  say-as(interpret-as="time")
     block
 mixin telephone
-  say-as interpret-as="telephone"
+  say-as(interpret-as="telephone")
     block
 mixin address
-  say-as interpret-as="address"
+  say-as(interpret-as="address")
     block
 mixin interjection
-  say-as interpret-as="interjection"
+  say-as(interpret-as="interjection")
     block
 mixin expletive
-  say-as interpret-as="expletive"
+  say-as(interpret-as="expletive")
     block
 
 //-
@@ -97,6 +97,21 @@ mixin x-high
 //-
 //- volume: silent, x-soft, soft, medium, loud, x-loud
 //-
+mixin silent
+  prosody(volume="silent")
+    block
+mixin x-soft
+  prosody(volume="x-soft")
+    block
+mixin soft
+  prosody(volume="soft")
+    block
+mixin medium-volume
+  prosody(volume="medium")
+    block
 mixin loud
   prosody(volume="loud")
+    block
+mixin x-loud
+  prosody(volume="x-loud")
     block
