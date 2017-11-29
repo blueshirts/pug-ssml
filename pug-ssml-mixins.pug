@@ -1,0 +1,102 @@
+//-
+//- interpret-as
+//-   - characters, spell-out: Spell out each letter.
+//-   - cardinal, number: Interpret the value as a cardinal number.
+//-   - ordinal: Interpret the value as an ordinal number.
+//-   - digits: Spell each digit separately.
+//-   - fraction: Interpret the value as a fraction. This works for both common fractions (such as 3/20) and mixed fractions (such as 1+1/2).
+//-   - unit: Interpret a value as a measurement. The value should be either a number or fraction followed by a unit (with no space in between) or just a unit.
+//-   - date: Interpret the value as a date. Specify the format with the format attribute.
+//-   - time: Interpret a value such as 1'21" as duration in minutes and seconds.
+//-   - telephone: Interpret a value as a 7-digit or 10-digit telephone number. This can also handle extensions (for example, 2025551212x345).
+//-   - address: Interpret a value as part of street address.
+//-   - interjection: Interpret the value as an interjection. Alexa speaks the text in a more expressive voice. For optimal results, only use the supported interjections and surround each speechcon with a pause. For example: <say-as interpret-as="interjection">Wow.</say-as>. Speechcons are supported for the languages listed below.
+//-   - expletive: “Bleep” out the content inside the tag.
+//-
+mixin characters
+  say-as interpret-as="characters"
+    block
+mixin spell-as
+  say-as interpret-as="spell-as"
+    block
+mixin number
+  say-as interpret-as="number"
+    block
+mixin cardinal
+  say-as interpret-as="cardinal"
+    block
+mixin ordinal
+  say-as interpret-as="ordinal"
+    block
+mixin digits
+  say-as interpret-as="digits"
+    block
+mixin fraction
+  say-as interpret-as="fraction"
+    block
+mixin unit
+  say-as interpret-as="unit"
+    block
+mixin date
+  say-as interpret-as="date"
+    block
+mixin time
+  say-as interpret-as="time"
+    block
+mixin telephone
+  say-as interpret-as="telephone"
+    block
+mixin address
+  say-as interpret-as="address"
+    block
+mixin interjection
+  say-as interpret-as="interjection"
+    block
+mixin expletive
+  say-as interpret-as="expletive"
+    block
+
+//-
+//- rate: x-slow, slow, medium, fast, x-fast
+//-
+mixin x-slow
+  prosody(rate="x-slow")
+    block
+mixin slow
+  prosody(rate="slow")
+    block
+mixin medium-rate
+  prosody(rate="medium")
+    block
+mixin fast
+  prosody(rate="fast")
+    block
+mixin x-fast
+  prosody(rate="x-fast")
+    block
+
+//-
+//- pitch: x-low, low, medium, high, x-high
+//-
+mixin x-low
+  prosody(pitch="x-low")
+    block
+mixin low
+  prosody(pitch="low")
+    block
+mixin medium-pitch
+  prosody(pitch="medium")
+    block
+mixin high
+  prosody(pitch="high")
+    block
+mixin x-high
+  prosody(pitch="x-high")
+    block
+
+//-
+//- volume: silent, x-soft, soft, medium, loud, x-loud
+//-
+mixin loud
+  prosody(volume="loud")
+    block

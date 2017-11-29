@@ -1,0 +1,30 @@
+{
+  "name": "pug-ssml",
+  "version": "0.0.1",
+  "description": "An SSML pug templating engine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blueshirts/pug-ssml.git"
+  },
+  "keywords": [
+    "pug",
+    "ssml",
+    "template"
+  ],
+  "author": "Anthony Milano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blueshirts/pug-ssml/issues"
+  },
+  "homepage": "https://github.com/blueshirts/pug-ssml#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "pug": "^2.0.0-rc.4",
+    "uglify-js": "^3.2.0"
+  }
+}
