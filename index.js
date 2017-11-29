@@ -37,7 +37,6 @@ function precompile(folder, options = {}) {
 
     // Create pug options.
     const mergedOptions = Object.assign(defaultPugOptions, options, { name: name })
-    console.dir(mergedOptions)
 
     // Read the template.
     const template = fs.readFileSync(filename, 'utf8')
@@ -59,6 +58,7 @@ function precompile(folder, options = {}) {
 
     // Ensure the output directory exists.
     if (!fs.existsSync(outputDir)){
+      // TODO: Need to recursively create the directories.
       fs.mkdirSync(outputDir)
     }
     // Write the file.

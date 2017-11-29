@@ -1,4 +1,47 @@
 
+## Usage
+
+### Install
+
+Install the library as a development dependency.
+
+    npm install pug-ssml --save-dev
+
+### Compile Templates
+
+At the current time there is no cli tool though I will create one.  For
+the time being this simple script can be run to compile templates to a
+Node module.  For my current use I use a Makefile with a simple .js script.
+
+    // Require the tool.
+    const pug = require('pug-ssml')
+
+    // Compile the templates into a Node module.
+    pug.precompile('./templates', {
+        basedir: './node_modules/pug-ssml',
+        file: 'ssml-speech.js',
+        pretty: false
+    })
+
+    
+### Options
+
+See the pug reference the other available options.
+
+https://pugjs.org/api/reference.html
+
+
+### Module Size
+
+If you are concerned about the size of the output module disable debug.
+Note that the error messages you will receive may not be helpful with
+this option off.
+
+    const options = {
+      compileDebug: false
+    }
+    
+
 ### Available Mixins
 
 There are many defined that are automatically available to your templates.
@@ -54,4 +97,16 @@ https://www.w3.org/TR/speech-synthesis11/
 
 There is not currently a CLI tool available for this project. If demand warrants it I will create one.
 
-    node 
+    TBD
+    
+## ToDo
+
+alexa
+- Add Alexa examples.
+
+cli
+- Document how to compile now.
+- Create a cli tool for compiling.
+
+Lint
+- Look into using pug lint.
