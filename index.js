@@ -11,7 +11,7 @@ const fs = require('fs')
 const ug = require("uglify-js")
 
 // The default mixins file.
-const mixins = './pug-ssml-mixins.pug'
+const mixins = 'pug-ssml-mixins.pug'
 
 // The default output file.
 const defaultOutputFile = 'ssml-speech.js'
@@ -37,6 +37,7 @@ function precompile(folder, options = {}) {
 
     // Create pug options.
     const mergedOptions = Object.assign(defaultPugOptions, options, { name: name })
+    console.dir(mergedOptions)
 
     // Read the template.
     const template = fs.readFileSync(filename, 'utf8')
