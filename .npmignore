@@ -1,0 +1,6 @@
+# Output directory.
+dist
+
+# Test files.
+test
+templates
