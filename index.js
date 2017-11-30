@@ -9,6 +9,7 @@
 const pug = require('pug')
 const fs = require('fs')
 const ug = require("uglify-js")
+const mkdirp = require('mkdirp')
 
 // The default mixins file.
 const mixins = 'pug-ssml-mixins.pug'
@@ -57,76 +58,13 @@ function precompile(folder, options = {}) {
     const outputDir = options.output ? options.output : '.'
 
     // Ensure the output directory exists.
-    if (!fs.existsSync(outputDir)){
-      // TODO: Need to recursively create the directories.
-      fs.mkdirSync(outputDir)
-    }
+    mkdirp.sync(outputDir)
+
     // Write the file.
     fs.writeFileSync(`${outputDir}/${outputFile}`, ug.minify(result.join(';')).code)
   } catch (err) {
     console.log(err)
   }
 }
-
-// Allow requiring of pug templates.
-// require.extensions['.pug'] = function (module, filename) {
-//   module.exports = fs.readFileSync(filename, 'utf8')
-// }
-//
-// function compile(name, folder, file, options = {}) {
-//   const filename = `${folder}/${file}`
-//   console.log(`Compiling file: ${filename}`)
-//
-//   const mergedOptions = Object.assign(options, {filename: filename, name: name})
-//   const template = fs.readFileSync(filename, 'utf8')
-//   const c = pug.compileClient('include ssml_mixins\n'.concat(template), mergedOptions)
-//   const code = eval(`${c}; ${name}`)
-//   console.dir(eval(code))
-//   return code
-// }
-
-// function compileToString(name, folder, file, options) {
-//   const filename = `${folder}/${file}`
-//   const mergedOptions = Object.assign(options, {filename: filename, name: name})
-//   const template = fs.readFileSync(filename, 'utf8')
-//   // const s = pug.compileClient('include ssml_mixins\n'.concat(template), mergedOptions)
-//   const s = pug.compileClient(template, mergedOptions)
-//   console.dir(s)
-//   return s
-// }
-
-// function precompile(folder, options = {}) {
-//   const result = []
-//   fs.readdirSync(folder).forEach(file => {
-//     const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'))
-//
-//     // Process the file.
-//     result.push(compileToString(name, folder, file, options))
-//   result.push(`exports.${name} = ${name}`)
-// })
-//   fs.writeFileSync(`./ssml-speech.js`, result.join(';'))
-// }
-
-// function load(folder, options = {}) {
-//   const result = {}
-//   fs.readdirSync(folder).forEach(file => {
-//     const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'))
-//
-//     // Process the file.
-//     result[name] = compile(name, folder, file, options)
-//   })
-//   return result
-// }
-
-// const s = pug.compileFileClient('./test/template-using-mixin.pug', {filename: './template-using-mixin.pug', name: 'template-using-mixin', compileDebug: false, pretty: false})
-// console.dir(s)
-
-// const templates = load('./templates')
-// console.dir(templates)
-// console.log(templates.welcome({answer: '5', correct: true}))
-// console.log(templates.answer({answer: '5', correct: true}))
-
-// const code = precompile('./templates')
-// console.dir(code)
 
 exports.precompile = precompile
