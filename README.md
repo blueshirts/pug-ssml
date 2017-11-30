@@ -32,7 +32,7 @@ Output:
 
 #### Better Example
 
-```
+```pug
     s
       | This is a sentence with
       prosody volume("loud") loud
@@ -74,7 +74,7 @@ Output:
 
 Here is a complex usage.  Refer to the Pug documentation for additional details.
 
-```
+```pug
     // This is a comment.
     
     //- This is a comment that won't show up in the template.
@@ -151,7 +151,7 @@ Require the ssml-speech.js file like any other module.
 
 Invoke a template function.
 
-```javascript
+```Javascript
     // A template with no context parameters.
     templates.mytemplate()
     
@@ -244,7 +244,11 @@ Tags and plugins can be nested to form unqiue speech sounds.
         +fast
           loud and fast speech!
 ```          
-          
+
+See the following file for the supported Mixin definitions.
+
+[Pug SSML Mixins](pug-ssml-mixins.pug)
+
 ## Template Names
 
 Templates with dashes in the names are automatically converted to underscores in the JavaScript output.
