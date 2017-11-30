@@ -83,20 +83,45 @@ Install the library as a development dependency.
     
 After installing you can use the library to compile Pug templates into a standard Node module.  For example...
 
-1. Create Pug templates in a ./templates folder.
+### Create Templates 
+
+Create Pug templates in a ./templates folder.
 
     # ./templates/mytemplate.pug
     s
       | This is a simple template.
+ 
+    
+### Compile Templates
+
+Compile the templates to a Node module using the steps below.  You will
+end up with a ssml-speech.js file. At the current time there is no cli
+tool though I will create one.  For the time being this simple script
+can be run to compile templates to a Node module.  For my current use
+I use a Makefile with a simple .js script. You could also easily run it
+from Grunt or a similar tool.
+
+    // Require the tool.
+    const pug = require('pug-ssml')
+
+    // Compile the templates into a Node module.
+    pug.precompile('./templates', {
+        basedir: './node_modules/pug-ssml',
+        file: 'ssml-speech.js',
+        pretty: false
+    })
     
     
-2. Compile the templates to a Node module using the steps below.  You will end up with a ssml-speech.js file.
-3. Require the ssml-speech.js file like any other module.
+### Require the Module
+
+Require the ssml-speech.js file like any other module.
 
     const templates = require('./ssml-speech')
     
     
-4. Invoke a template function.
+### Run the Template
+
+Invoke a template function.
 
     # A template with no context parameters.
     templates.mytemplate()
@@ -110,32 +135,15 @@ After installing you can use the library to compile Pug templates into a standar
     }
     templates.mytemplate(context)
     
-    
-5. Use the result text to generate speech.
+### Use the Output
+   
+Use the result text to generate speech.
 
     # Send the text to a speech engine.
     const text = templates.mytemplate()
     this.response.speak(text).listen(text)
 
 
-### Compile Templates
-
-At the current time there is no cli tool though I will create one.  For
-the time being this simple script can be run to compile templates to a
-Node module.  For my current use I use a Makefile with a simple .js
-script. You could also easily run it from Grunt or a similar tool.
-
-    // Require the tool.
-    const pug = require('pug-ssml')
-
-    // Compile the templates into a Node module.
-    pug.precompile('./templates', {
-        basedir: './node_modules/pug-ssml',
-        file: 'ssml-speech.js',
-        pretty: false
-    })
-
-    
 ### Options
 
 You can pass user options to the precompile function.
