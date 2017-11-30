@@ -249,6 +249,9 @@ See the following file for the supported Mixin definitions.
 
 [Pug SSML Mixins](pug-ssml-mixins.pug)
 
+The templates generally fallow the
+[Amazon SSML definitions](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html#supported-speechcons).
+
 ## Template Names
 
 Templates with dashes in the names are automatically converted to underscores in the JavaScript output.
