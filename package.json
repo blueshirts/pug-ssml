@@ -1,6 +1,6 @@
 {
   "name": "pug-ssml",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "An SSML pug templating engine.",
   "main": "index.js",
   "scripts": {
