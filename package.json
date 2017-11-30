@@ -1,10 +1,10 @@
 {
   "name": "pug-ssml",
-  "version": "0.0.8",
-  "description": "An SSML pug templating engine.",
+  "version": "0.0.9",
+  "description": "An bundle templating engine utilizing Pug templates to generate SSML using mixins.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,10 @@
   "keywords": [
     "pug",
     "ssml",
-    "template"
+    "template",
+    "alexa",
+    "speech",
+    "prosody"
   ],
   "author": "Anthony Milano",
   "license": "MIT",

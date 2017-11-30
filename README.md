@@ -26,7 +26,7 @@ A simple example.  All three variations generate roughly the same output.
     
 Output:
 
-```
+```xml
     <s>This is a template for a simple sentence.</s>
 ```
 
@@ -38,6 +38,12 @@ Output:
       prosody volume("loud") loud
       | text embedded within it.
 ```      
+
+Output:
+
+```xml
+    <s>This is a sentence with<prosody volume="loud">loud</prosody>text embedded within it.</s>
+```
     
 #### Hierarchical Example using Provided Mixins.
 
@@ -45,14 +51,24 @@ Here is an example with loud/fast speech embedded in it. This example utilizes
 nesting of ssml elements. The ssml elements are generated using mixins provided
 by this library to make templates easier to write.
 
-```
+```pug
     s
       | This is a sentence with
-      + loud
-        +
-          | fast
+      +loud
+        +fast
+          | loud and fast
       | speech embedded within in.
 ```    
+
+Output:
+
+```xml
+    <s>
+        This is a sentence with
+        <prosody volume="loud"><prosody rate="fast">loua and fast</prosody></prosody>
+        speech embedded within it.
+    </s>
+```
 
 #### Kitchen Sink
 
@@ -86,7 +102,7 @@ Here is a complex usage.  Refer to the Pug documentation for additional details.
 
 Install the library as a development dependency.
 
-```
+```bash
     npm install pug-ssml --save-dev
 ```
     
@@ -96,7 +112,7 @@ After installing you can use the library to compile Pug templates into a standar
 
 Create Pug templates in a ./templates folder.
 
-```
+```pug
     # ./templates/mytemplate.pug
     s
       | This is a simple template.
@@ -111,7 +127,7 @@ can be run to compile templates to a Node module.  For my current use
 I use a Makefile with a simple .js script. You could also easily run it
 from Grunt or a similar tool.
 
-```
+```javascript
     // Require the tool.
     const pug = require('pug-ssml')
 
@@ -127,7 +143,7 @@ from Grunt or a similar tool.
 
 Require the ssml-speech.js file like any other module.
 
-```
+```javascript
     const templates = require('./ssml-speech')
 ```    
      
@@ -135,14 +151,14 @@ Require the ssml-speech.js file like any other module.
 
 Invoke a template function.
 
-```
-    # A template with no context parameters.
+```javascript
+    // A template with no context parameters.
     templates.mytemplate()
     
-    # A template with context parameters.
+    // A template with context parameters.
     const context = {
       someValue: 'A value to pass in.',
-      helper: function() {
+      'helper': function() {
         return 'Some helper value!'
       }
     }
@@ -153,8 +169,8 @@ Invoke a template function.
    
 Use the result text to generate speech.
 
-```
-    # Send the text to a speech engine.
+```javascript
+    // Send the text to a speech engine.
     const text = templates.mytemplate()
     this.response.speak(text).listen(text)
 ```
@@ -163,7 +179,7 @@ Use the result text to generate speech.
 
 You can pass user options to the precompile function.
 
-```
+```javascript
     pug.precompile(template, options)
 ```    
     
@@ -171,7 +187,7 @@ You can pass user options to the precompile function.
 
 The output parameter specifies where the generated module will be created.
 
-```
+```javascript
     {
       output: './dist'
     } 
@@ -181,7 +197,7 @@ The output parameter specifies where the generated module will be created.
 
 The file parameter specifies the name of the generated module.
 
-```
+```javascript
     {
       file: 'ssml-speech.js'
     }
@@ -193,7 +209,7 @@ If you are concerned about the size of the output module disable debug.
 Note that the error messages you will receive may not be helpful with
 this option off.  compileDebug is a standard Pug option.
 
-```
+```javascript
     const options = {
       compileDebug: false
     }
@@ -213,7 +229,7 @@ There are many defined that are automatically available to your templates.
 Below is an example of using loud.  Note that there is no space after the
 plus symbol.
 
-```
+```pug
     //  Loud speech sentence.
     s This is some
       +loud loud speech!
@@ -221,7 +237,7 @@ plus symbol.
     
 Tags and plugins can be nested to form unqiue speech sounds.
 
-```
+```pug
     // Loud and fast speech sentance.
     s This is some
       +loud
@@ -241,7 +257,7 @@ https://pugjs.org/language/plain-text.html#whitespace-control
 
 The safest way to ensure a space is added within your template is to add a newline using a pipe.
 
-```
+```pug
     p Paragraph one text.
     |
     p Paragraph two text.
