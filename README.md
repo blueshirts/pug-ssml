@@ -249,7 +249,7 @@ See the following file for the supported Mixin definitions.
 
 [Pug SSML Mixins](pug-ssml-mixins.pug)
 
-The templates generally fallow the
+The templates generally follow the
 [Amazon SSML definitions](https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html).
 
 ## Template Names
