@@ -120,11 +120,15 @@ s
     
 #### Compile Templates
 
-Compile the templates to a Node module using the steps below.  You will
-end up with a ssml-speech.js file. At the current time there is no cli
-tool though I will create one.  For the time being this simple script
-can be run to compile templates to a Node module.  For my current use
-I use a Makefile with a simple .js script. You could also easily run it
+Compile the templates into a node module using one of the options below. Both options will generate a ssml-speech.js
+file that can be imported into your project.
+
+There is currently a version of the cli being tested. It can be downloaded at the following url.
+
+https://github.com/blueshirts/pug-ssml-cli
+
+If the cli is not working for you or is no preferable you can create a simple script that can be run to compile
+templates to a Node module.  For my current use I use a Makefile with a simple .js script. You could also easily run it
 from Grunt or a similar tool.
 
 ```javascript
