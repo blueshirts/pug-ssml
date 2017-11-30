@@ -288,14 +288,23 @@ See the following link for additional details.
 
 https://www.w3.org/TR/speech-synthesis11/
 
+## Caveats
+
+The current code base relies on an internal absolute template include.  Because of this dependency this module
+expects to find the pug-ssml-mixins.pug in the absolute template directory (i.e. pug basedir). If you are not using
+absolute template includes (or using relative includes) then this issue will not effect you. If you are using absolute includes then you may need
+to copy the pug-ssml-mixins.pug file into your absolute include directory.  This directory is specified using the
+options.basedir property.  In this module it defaults to '.'.  Note that that default may not be the case for derived
+modules such as the pug-ssml-cli.
+
 ## ToDo
 
-alexa
-- Add Alexa examples.
+Global include issue
+- Document the global include issue, find an alternative.
+- If the current approach is not preferable the mixins file can be copied in your absolute basedir instead.
 
-cli
-- Document how to compile now.
-- Create a cli tool for compiling.
+Alexa
+- Add Alexa examples.
 
 Lint
 - Look into using pug lint.
