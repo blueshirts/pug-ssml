@@ -16,33 +16,33 @@ I sure this will not be preferable to everyone I found it very easy to work with
 
 A simple example.  All three variations generate roughly the same output.
 
-```
-    s This is a template for a simple sentence.
-    s.
-      This is a template for a simple sentence.
-    s
-      | This is a template for a simple sentence.
+```xml
+s This is a template for a simple sentence.
+s.
+  This is a template for a simple sentence.
+s
+  | This is a template for a simple sentence.
 ```
     
 Output:
 
 ```xml
-    <s>This is a template for a simple sentence.</s>
+<s>This is a template for a simple sentence.</s>
 ```
 
 #### Better Example
 
 ```pug
-    s
-      | This is a sentence with
-      prosody volume("loud") loud
-      | text embedded within it.
+s
+  | This is a sentence with
+  prosody volume("loud") loud
+  | text embedded within it.
 ```      
 
 Output:
 
 ```xml
-    <s>This is a sentence with<prosody volume="loud">loud</prosody>text embedded within it.</s>
+<s>This is a sentence with<prosody volume="loud">loud</prosody>text embedded within it.</s>
 ```
     
 #### Hierarchical Example using Provided Mixins.
@@ -52,22 +52,22 @@ nesting of ssml elements. The ssml elements are generated using mixins provided
 by this library to make templates easier to write.
 
 ```pug
-    s
-      | This is a sentence with
-      +loud
-        +fast
-          | loud and fast
-      | speech embedded within in.
+s
+  | This is a sentence with
+  +loud
+    +fast
+      | loud and fast
+  | speech embedded within in.
 ```    
 
 Output:
 
 ```xml
-    <s>
-        This is a sentence with
-        <prosody volume="loud"><prosody rate="fast">loua and fast</prosody></prosody>
-        speech embedded within it.
-    </s>
+<s>
+    This is a sentence with
+    <prosody volume="loud"><prosody rate="fast">loua and fast</prosody></prosody>
+    speech embedded within it.
+</s>
 ```
 
 #### Kitchen Sink
@@ -75,25 +75,25 @@ Output:
 Here is a complex usage.  Refer to the Pug documentation for additional details.
 
 ```pug
-    // This is a comment.
-    
-    //- This is a comment that won't show up in the template.
-    
-    //- This is an example logic usage based on a template context.
-    if someVar
-      s Some variable was true: #{someVar}.
-    else
-      s Some variable was false: #{someVar}.
-      
-    //- This is an example of nesting mixins.
-    s
-      +loud
-        +fast
-          +high
-            | This is some loud, fast, and high speech!
-            
-    s
-      | You can also pass in #{helper()} functions in the template context.
+// This is a comment.
+
+//- This is a comment that won't show up in the template.
+
+//- This is an example logic usage based on a template context.
+if someVar
+  s Some variable was true: #{someVar}.
+else
+  s Some variable was false: #{someVar}.
+  
+//- This is an example of nesting mixins.
+s
+  +loud
+    +fast
+      +high
+        | This is some loud, fast, and high speech!
+        
+s
+  | You can also pass in #{helper()} functions in the template context.
 ```
                     
 ## Usage
@@ -103,7 +103,7 @@ Here is a complex usage.  Refer to the Pug documentation for additional details.
 Install the library as a development dependency.
 
 ```bash
-    npm install pug-ssml --save-dev
+npm install pug-ssml --save-dev
 ```
     
 After installing you can use the library to compile Pug templates into a standard Node module.  For example...
@@ -113,9 +113,9 @@ After installing you can use the library to compile Pug templates into a standar
 Create Pug templates in a ./templates folder.
 
 ```pug
-    # ./templates/mytemplate.pug
-    s
-      | This is a simple template.
+//- ./templates/mytemplate.pug
+s
+  | This is a simple template.
 ``` 
     
 #### Compile Templates
@@ -128,15 +128,15 @@ I use a Makefile with a simple .js script. You could also easily run it
 from Grunt or a similar tool.
 
 ```javascript
-    // Require the tool.
-    const pug = require('pug-ssml')
+// Require the tool.
+const pug = require('pug-ssml')
 
-    // Compile the templates into a Node module.
-    pug.precompile('./templates', {
-        basedir: './node_modules/pug-ssml',
-        file: 'ssml-speech.js',
-        pretty: false
-    })
+// Compile the templates into a Node module.
+pug.precompile('./templates', {
+    basedir: './node_modules/pug-ssml',
+    file: 'ssml-speech.js',
+    pretty: false
+})
 ```    
     
 #### Require the Module
@@ -144,7 +144,7 @@ from Grunt or a similar tool.
 Require the ssml-speech.js file like any other module.
 
 ```javascript
-    const templates = require('./ssml-speech')
+const templates = require('./ssml-speech')
 ```    
      
 #### Run the Template
@@ -152,17 +152,17 @@ Require the ssml-speech.js file like any other module.
 Invoke a template function.
 
 ```Javascript
-    // A template with no context parameters.
-    templates.mytemplate()
-    
-    // A template with context parameters.
-    const context = {
-      someValue: 'A value to pass in.',
-      'helper': function() {
-        return 'Some helper value!'
-      }
-    }
-    templates.mytemplate(context)
+// A template with no context parameters.
+templates.mytemplate()
+
+// A template with context parameters.
+const context = {
+  someValue: 'A value to pass in.',
+  'helper': function() {
+    return 'Some helper value!'
+  }
+}
+templates.mytemplate(context)
 ```
 
 #### Use the Output
@@ -170,9 +170,9 @@ Invoke a template function.
 Use the result text to generate speech.
 
 ```javascript
-    // Send the text to a speech engine.
-    const text = templates.mytemplate()
-    this.response.speak(text).listen(text)
+// Send the text to a speech engine.
+const text = templates.mytemplate()
+this.response.speak(text).listen(text)
 ```
 
 ## Compiler Options
@@ -180,7 +180,7 @@ Use the result text to generate speech.
 You can pass user options to the precompile function.
 
 ```javascript
-    pug.precompile(template, options)
+pug.precompile(template, options)
 ```    
     
 #### Output
@@ -188,9 +188,9 @@ You can pass user options to the precompile function.
 The output parameter specifies where the generated module will be created.
 
 ```javascript
-    {
-      output: './dist'
-    } 
+{
+  output: './dist'
+} 
 ```
 
 #### File
@@ -198,9 +198,9 @@ The output parameter specifies where the generated module will be created.
 The file parameter specifies the name of the generated module.
 
 ```javascript
-    {
-      file: 'ssml-speech.js'
-    }
+{
+  file: 'ssml-speech.js'
+}
 ```
 
 #### compileDebug
@@ -210,9 +210,9 @@ Note that the error messages you will receive may not be helpful with
 this option off.  compileDebug is a standard Pug option.
 
 ```javascript
-    const options = {
-      compileDebug: false
-    }
+const options = {
+  compileDebug: false
+}
 ```
     
 #### Other Options
@@ -230,19 +230,19 @@ Below is an example of using loud.  Note that there is no space after the
 plus symbol.
 
 ```pug
-    //  Loud speech sentence.
-    s This is some
-      +loud loud speech!
+//  Loud speech sentence.
+s This is some
+  +loud loud speech!
 ```      
     
 Tags and plugins can be nested to form unqiue speech sounds.
 
 ```pug
-    // Loud and fast speech sentance.
-    s This is some
-      +loud
-        +fast
-          loud and fast speech!
+// Loud and fast speech sentance.
+s This is some
+  +loud
+    +fast
+      loud and fast speech!
 ```          
 
 See the following file for the supported Mixin definitions.
@@ -265,9 +265,9 @@ https://pugjs.org/language/plain-text.html#whitespace-control
 The safest way to ensure a space is added within your template is to add a newline using a pipe.
 
 ```pug
-    p Paragraph one text.
-    |
-    p Paragraph two text.
+p Paragraph one text.
+|
+p Paragraph two text.
 ```
     
 Note that in this case the space was not needed because each of the paragraphs is embedded within 
