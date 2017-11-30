@@ -1,6 +1,6 @@
 # Pug SSML
 
-Pug SSML is a library for easily generating SSML speech using the pug templating language.
+Pug SSML is a library for easily generating SSML speech text using the pug templating language.
 
 ## Introduction
 
