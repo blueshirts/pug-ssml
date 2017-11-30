@@ -1,4 +1,78 @@
+# Pug SSML
 
+Pug SSML is a library for easily generating SSML speech using the pug templating language.
+
+## Introduction
+
+I started generating a good amount of SSML speech text while writing Alexa
+skills. I found it tedious and clumsy to do so with vanilla JavaScript. I did
+find a few libraries for generating SSML though most of them utilize function
+chaining in order to create speech text. While this can be effective I found 
+it problematic when generating nested speech tags. I felt like the Pug 
+templating language is an easy solution for generating SSML speech text.  While
+I sure this will not be preferable to everyone I found it very easy to work with.
+
+### Simple Example
+
+A simple example.  All three variations generate roughly the same output.
+
+    s This is a template for a simple sentence.
+    s.
+      This is a template for a simple sentence.
+    s
+      | This is a template for a simple sentence.
+    
+Output:
+
+    <s>This is a template for a simple sentence.</s>
+
+### Better Example
+
+    s
+      | This is a sentence with
+      prosody volume("loud") loud
+      | text embedded within it.
+      
+    
+### Hierarchical Example using Provided Mixins.
+
+Here is an example with loud/fast speech embedded in it. This example utilizes
+nesting of ssml elements. The ssml elements are generated using mixins provided
+by this library to make templates easier to write.
+
+    s
+      | This is a sentence with
+      + loud
+        +
+          | fast
+      | speech embedded within in.
+    
+
+### Kitchen Sink
+
+Here is a complex usage.  Refer to the Pug documentation for additional details.
+
+    // This is a comment.
+    
+    //- This is a comment that won't show up in the template.
+    
+    //- This is an example logic usage based on a template context.
+    if someVar
+      s Some variable was true: #{someVar}.
+    else
+      s Some variable was false: #{someVar}.
+      
+    //- This is an example of nesting mixins.
+    s
+      +loud
+        +fast
+          +high
+            | This is some loud, fast, and high speech!
+            
+    s
+      | You can also pass in #{helper()} functions in the template context.
+
+                    
 ## Usage
 
 ### Install
@@ -6,12 +80,50 @@
 Install the library as a development dependency.
 
     npm install pug-ssml --save-dev
+    
+After installing you can use the library to compile Pug templates into a standard Node module.  For example...
+
+1. Create Pug templates in a ./templates folder.
+
+    # ./templates/mytemplate.pug
+    s
+      | This is a simple template.
+    
+    
+2. Compile the templates to a Node module using the steps below.  You will end up with a ssml-speech.js file.
+3. Require the ssml-speech.js file like any other module.
+
+    const templates = require('./ssml-speech')
+    
+    
+4. Invoke a template function.
+
+    # A template with no context parameters.
+    templates.mytemplate()
+    
+    # A template with context parameters.
+    const context = {
+      someValue: 'A value to pass in.',
+      helper: function() {
+        return 'Some helper value!'
+      }
+    }
+    templates.mytemplate(context)
+    
+    
+5. Use the result text to generate speech.
+
+    # Send the text to a speech engine.
+    const text = templates.mytemplate()
+    this.response.speak(text).listen(text)
+
 
 ### Compile Templates
 
 At the current time there is no cli tool though I will create one.  For
 the time being this simple script can be run to compile templates to a
-Node module.  For my current use I use a Makefile with a simple .js script.
+Node module.  For my current use I use a Makefile with a simple .js
+script. You could also easily run it from Grunt or a similar tool.
 
     // Require the tool.
     const pug = require('pug-ssml')
@@ -26,21 +138,46 @@ Node module.  For my current use I use a Makefile with a simple .js script.
     
 ### Options
 
-See the pug reference the other available options.
+You can pass user options to the precompile function.
 
-https://pugjs.org/api/reference.html
+    pug.precompile(template, options)
+    
+#### Output
+
+The output parameter specifies where the generated module will be created.
+
+    {
+      output: './dist'
+    } 
 
 
-### Module Size
+#### File
+
+The file parameter specifies the name of the generated module.
+
+    {
+      file: 'ssml-speech.js'
+    }
+    
+
+#### compileDebug
 
 If you are concerned about the size of the output module disable debug.
 Note that the error messages you will receive may not be helpful with
-this option off.
+this option off.  compileDebug is a standard Pug option.
 
     const options = {
       compileDebug: false
     }
+
     
+#### Other Options
+    
+The Pug library which this pug-ssml is built on top of has many available options.
+See the pug reference the other available options.
+
+https://pugjs.org/api/reference.html
+
 
 ### Available Mixins
 
@@ -51,6 +188,7 @@ plus symbol.
     //  Loud speech sentence.
     s This is some
       +loud loud speech!
+      
     
 Tags and plugins can be nested to form unqiue speech sounds.
 
@@ -80,8 +218,6 @@ The safest way to ensure a space is added within your template is to add a newli
 Note that in this case the space was not needed because each of the paragraphs is embedded within 
 an element.    
 
-    
-    
 In most cases this is not an issue because spaces are assumed by SSML in many cases.
 
 > A simple English example is "cup<break/>board"; outside the token and w elements, 
@@ -93,12 +229,6 @@ See the following link for additional details.
 
 https://www.w3.org/TR/speech-synthesis11/
 
-### pug ssml cli
-
-There is not currently a CLI tool available for this project. If demand warrants it I will create one.
-
-    TBD
-    
 ## ToDo
 
 alexa
