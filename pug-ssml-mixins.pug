@@ -1,4 +1,61 @@
 //-
+//- Supported Pug SSML Mixins.
+//-
+
+//-
+//- amazon:effect
+//-
+mixin whispered
+  amazon:effect(name="whispered")
+    block
+
+//-
+//- weak-break, weak was taken by weak emphasis.
+//-
+mixin weak-break
+  break(strength="weak")
+    block
+
+//-
+//- emphasis: strong, moderate, reduced
+//-
+mixin strong
+  emphasis(level="strong")
+    block
+mixin moderate
+  emphasis(level="moderate")
+    block
+mixin weak
+  emphasis(level="weak")
+    block
+
+//-
+//- phoneme: ipa, x-sampa
+//-
+mixin ipa
+  phoneme(alphabet="ipa")
+    block
+mixin x-sampa
+  poneme(alphabet="x-sampa")
+    block
+
+//-
+//- w: VB, VBD, NN: SENSE_1
+//-
+mixin VB
+  w(role="amazon:VB")
+    block
+mixin VDB
+  w(role="amazon:VBD")
+    block
+mixin NN
+  w(role="amazon:NN")
+    block
+mixin SENSE1
+  w(role="amazon:SENSE_1")
+    block
+
+//-
 //- interpret-as
 //-   - characters, spell-out: Spell out each letter.
 //-   - cardinal, number: Interpret the value as a cardinal number.

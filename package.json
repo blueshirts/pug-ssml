@@ -1,6 +1,6 @@
 {
   "name": "pug-ssml",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "An bundle templating engine utilizing Pug templates to generate SSML using mixins.",
   "main": "index.js",
   "scripts": {
