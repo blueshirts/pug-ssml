@@ -74,6 +74,11 @@ describe('pug-ssml-tests', function() {
       should.exist(result)
       result.should.equal('<s><break strength="weak">This is a weak sentence.</break></s>')
     })
+    it('should render a template with dashes', function() {
+      should.exist(templates.using_many_dashes)
+      const result = templates.using_many_dashes()
+      result.should.equal('<p>This is a template that has many dashes in its name.</p>')
+    })
 
   })
 

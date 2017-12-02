@@ -30,7 +30,7 @@ function precompile(folder, options = {}) {
     let name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'))
     // Replace the dashes in the names with underscores so they are legal variable names.
     if (name.indexOf('-') !== -1) {
-      name = name.replace('-', '_')
+      name = name.replace(/-/g, '_')
     }
 
     // The complete filename.
