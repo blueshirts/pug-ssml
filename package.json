@@ -1,6 +1,6 @@
 {
   "name": "pug-ssml",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Pug SSML is a library for easily generating SSML speech text using the pug templating language.",
   "main": "index.js",
   "scripts": {
